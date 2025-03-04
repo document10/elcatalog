@@ -1,2 +1,7 @@
 # elcatalog
-C# Application for managing electronics catalogs
+#  RO
+Proiect pentru materia **Programare Interfete utilizator**
+
+#  EN
+
+Project for subject **User Interface Programming**
