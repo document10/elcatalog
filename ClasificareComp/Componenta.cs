@@ -13,9 +13,14 @@ public class Componenta
         cod = _c;
     }
 
-    public virtual string Afisare()
+    public virtual string Info()
     {
         return $"Componenta generica ({cod})";
+    }
+
+    public virtual string InfoFis()
+    {
+        return $"Comp|{cod}";
     }
 
 }

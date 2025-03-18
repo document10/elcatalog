@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 public class CircuitIntegrat : Componenta
 {
-    public string nume;
-    public List<string> porturi;
-    public List<string> alteSpec;
+    public string nume { get; set; }
+    public List<string> porturi { get; set; }
+    public List<string> alteSpec { get; set; }
 
     public CircuitIntegrat(string _cod = "FARACOD",string _nume="FARANUME") :base(_cod)
     {
@@ -17,14 +17,28 @@ public class CircuitIntegrat : Componenta
         alteSpec = new List<string>();
     }
 
-    public override string Afisare()
+    public CircuitIntegrat(string linie)
+    {
+        string[] vals = linie.Split('|');
+        this.cod = vals[1];
+        this.nume = vals[2];
+        this.porturi = new List<string>(vals[3].Split(';'));
+        this.alteSpec = new List<string>(vals[4].Split(';'));
+    }
+
+    public override string Info()
     {
         string ports = "",specs="";
         if (porturi.Count == 0) ports = "FARA";
-        else foreach (string p in porturi) ports += $"{p} ";
+        else ports = string.Join(" ", porturi);
         if (alteSpec.Count == 0) specs = "NESPECIFICAT";
-        else foreach (string s in alteSpec) specs+= $"{s} ";
+        else specs = string.Join(" ",alteSpec);
         return $"{nume} ({cod}) porturi: {ports};Alte specificatii:{specs}";
+    }
+
+    public override string InfoFis()
+    {
+        return $"CI|{cod}|{nume}|{string.Join(";",porturi)}|{string.Join(";",alteSpec)}";
     }
 
 }

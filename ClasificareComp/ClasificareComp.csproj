@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CircuitIntegrat.cs" />
     <Compile Include="Componenta.cs" />
+    <Compile Include="Dioda.cs" />
     <Compile Include="Liniar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sursa.cs" />

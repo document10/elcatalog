@@ -25,10 +25,13 @@ public enum Semnal
 
 public class Sursa : Componenta
 {
-    public TipSursa tip;
-    public Semnal semnal;
-    public double val, freq, rezint;
-    public Unitate uval,ufreq;
+    public TipSursa tip { get; set; }
+    public Semnal semnal { get; set; }
+    public double val { get; set; }
+    public double freq { get; set; }
+    public double rezint { get; set; }
+    public Unitate uval { get; set; }
+    public Unitate ufreq { get; set; }
 
     public Sursa(string _cod="FARACOD", TipSursa _tip=TipSursa.Tensiune, Semnal _semnal=Semnal.Arbitrar, double _val=0, double _freq = 0, Unitate _uval=Unitate.fara, Unitate _ufreq=Unitate.fara, double _rezint=0):base(_cod)
     {
@@ -41,7 +44,20 @@ public class Sursa : Componenta
         this.rezint = _rezint;
     }
 
-    public override string Afisare()
+    public Sursa(string linie)
+    {
+        string[] vals = linie.Split('|');
+        this.cod = vals[1];
+        this.tip = (TipSursa)Enum.Parse(typeof(TipSursa), vals[2]);
+        this.semnal = (Semnal)Enum.Parse(typeof(Semnal), vals[3]);
+        this.val = double.Parse(vals[4]);
+        this.freq = double.Parse(vals[5]);
+        this.rezint = double.Parse(vals[6]);
+        this.uval = (Unitate)Enum.Parse(typeof(Unitate), vals[7]);
+        this.ufreq = (Unitate)Enum.Parse(typeof(Unitate), vals[8]);
+    }
+
+    public override string Info()
     {
         string muval = "";
         if (uval != Unitate.fara) muval = uval.ToString();
@@ -68,5 +84,10 @@ public class Sursa : Componenta
             mufreq += "Hertzi";
             return $"Sursa de {tip.ToString()} de ({cod}) de forma {semnal.ToString()}, {val} {muval} la {freq} {mufreq}, {rezint} Ohmi rezistenta interna";
         }
+    }
+
+    public override string InfoFis()
+    {
+        return $"Sursa|{cod}|{tip.ToString()}|{semnal.ToString()}|{val}|{freq}|{rezint}|{uval.ToString()}|{ufreq.ToString()}";
     }
 }
