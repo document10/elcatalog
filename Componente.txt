@@ -1,0 +1,6 @@
+Comp|1003
+Liniar|1002|Rezistor|100|500|1200|fara|Ceramic
+Sursa|1922|Putere|Continuu|100|0|0|fara|fara
+Sursa|1922|Tensiune|Rectangular|400|3|0|fara|kilo
+Dioda|1943|Zener|0.7|7|100|Germaniu
+CI|1432|Punte redresoare|IN+;IN-;OUT+;OUT-|Tensiune Maxima: 400V

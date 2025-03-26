@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Aplicatie
 {
@@ -11,8 +12,10 @@ namespace Aplicatie
     {
         static void Main(string[] args)
         {
-            CatalogFisier cat = new CatalogFisier(ConfigurationManager.AppSettings["NumeFisier"]);
-            /*Decomentati daca nu aveti fisierul initial
+            string locatieFisierSolutie = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            CatalogFisier cat = new CatalogFisier(locatieFisierSolutie + "\\" + ConfigurationManager.AppSettings["NumeFisier"]);
+            /*
+            //Decomentati daca nu aveti fisierul initial
             cat.Adauga(new Componenta("1003"));
             cat.Adauga(new Liniar("1002", TipLiniar.Rezistor, 100, Unitate.fara, 500, 1200, "Ceramic"));
             cat.Adauga(new Sursa("1922", TipSursa.Putere, Semnal.Continuu, 100, 0, Unitate.fara, Unitate.fara, 0));
