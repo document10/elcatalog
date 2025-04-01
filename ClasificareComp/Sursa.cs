@@ -57,7 +57,7 @@ public class Sursa : Componenta
         this.ufreq = (Unitate)Enum.Parse(typeof(Unitate), vals[8]);
     }
 
-    public override string Info()
+    public override string ToString()
     {
         string muval = "";
         if (uval != Unitate.fara) muval = uval.ToString();

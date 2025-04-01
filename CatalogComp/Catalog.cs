@@ -45,7 +45,7 @@ public class Catalog
         string val = "";
         foreach (Componenta comp in comps)
         {
-            val += comp.Info()+"\n";
+            val += comp.ToString()+"\n";
         }
         return val;
     }

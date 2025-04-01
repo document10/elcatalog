@@ -26,7 +26,7 @@ public class CircuitIntegrat : Componenta
         this.alteSpec = new List<string>(vals[4].Split(';'));
     }
 
-    public override string Info()
+    public override string ToString()
     {
         string ports = "",specs="";
         if (porturi.Count == 0) ports = "FARA";

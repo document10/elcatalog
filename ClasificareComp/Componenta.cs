@@ -13,7 +13,7 @@ public class Componenta
         cod = _c;
     }
 
-    public virtual string Info()
+    public override string ToString()
     {
         return $"Componenta generica ({cod})";
     }

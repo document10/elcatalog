@@ -42,7 +42,7 @@ public class Liniar : Componenta
         this.mat = vals[7];
     }
 
-    public override string Info()
+    public override string ToString()
     {
         string munit="";
         if (unit != Unitate.fara) munit = unit.ToString();

@@ -40,7 +40,7 @@ public class Dioda : Componenta
         this.mat = vals[6];
     }
 
-    public override string Info()
+    public override string ToString()
     {
         return $"Dioda {tip} ({cod}) din {mat}, tensiune prag {tprag} V, tensiune strapungere {tstr} V, putere maxima {pmax} W";
     }
