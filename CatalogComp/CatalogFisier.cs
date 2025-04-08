@@ -79,7 +79,7 @@ public class CatalogFisier
         return ex;
     }
 
-    public Componenta CautaCod(string ccod)
+    public List<Componenta> CautaCod(string ccod)
     {
         return CopieMemorie().CautaCod(ccod);
     }

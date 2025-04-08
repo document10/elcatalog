@@ -1,6 +1,17 @@
-Comp|1003
 Liniar|1002|Rezistor|100|500|1200|fara|Ceramic
 Sursa|1922|Putere|Continuu|100|0|0|fara|fara
-Sursa|1922|Tensiune|Rectangular|400|3|0|fara|kilo
+Sursa|1925|Tensiune|Rectangular|400|3|0|fara|kilo
 Dioda|1943|Zener|0.7|7|100|Germaniu
 CI|1432|Punte redresoare|IN+;IN-;OUT+;OUT-|Tensiune Maxima: 400V
+CI|1454|Tranzistor Bipolar|Baza; Colector; Emitor|Vbe=0.7V;hfe=1000;putere maxima: 500W
+Liniar|1093|Condensator|66|100|205|nano|Ceramic
+Liniar|1099|Bobina|55|1000|1902|mili|Cupru
+Liniar|1234|Condensator|10|100|400|pico|Ceramic
+Sursa|1887|Curent|Fierastrau|25|100|5|fara|kilo
+Dioda|9931|Schottky|0.9|12|300|Ceramic
+CI|2256|Tranzistor TECMOS|Drena;Sursa;Poarta|Curent maxim 10A;Rezistenta activa 10 ohmi
+Liniar|1253|Rezistor|125|199|430|fara|Cupru
+Sursa|1204|Tensiune|Continuu|120|0|20|fara|fara
+CI|9900|Transformator|IN-;IN+;OUT-;OUT+|Raport IN/OUT: 1/6
+Liniar|1503|Rezistor|15|100|500|kilo|Aur
+Liniar|1922|Bobina|67.7|234|500|mili|Argint

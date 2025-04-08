@@ -60,9 +60,9 @@ public class Catalog
         return val;
     }
 
-    public Componenta CautaCod(string ccod)
+    public List<Componenta> CautaCod(string ccod)
     {
-        return comps.Find(c => c.cod == ccod);
+        return comps.FindAll(c =>c.cod.Contains(ccod));
     }
 
 }

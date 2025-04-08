@@ -18,6 +18,11 @@ public class Componenta
         return $"Componenta generica ({cod})";
     }
 
+    public virtual string Tip()
+    {
+        return "Generica";
+    }
+
     public virtual string InfoFis()
     {
         return $"Comp|{cod}";

@@ -62,7 +62,12 @@ public class Liniar : Componenta
                 break;
         }
         
-        return $"{tip.ToString()} din {mat} ({cod}), {val} {munit}; Tensiune maxima {vmax} V; Putere Maxima {pmax} W";
+        return $"{tip.ToString()} din {mat} ({cod}) {val} {munit}\nTensiune maxima {vmax} V\nPutere Maxima {pmax} W";
+    }
+
+    public override string Tip()
+    {
+        return "Liniar";
     }
 
     public override string InfoFis()
