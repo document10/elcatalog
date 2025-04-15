@@ -1,5 +1,3 @@
-Liniar|1002|Rezistor|100|500|1200|fara|Ceramic
-Sursa|1922|Putere|Continuu|100|0|0|fara|fara
 Sursa|1925|Tensiune|Rectangular|400|3|0|fara|kilo
 Dioda|1943|Zener|0.7|7|100|Germaniu
 CI|1432|Punte redresoare|IN+;IN-;OUT+;OUT-|Tensiune Maxima: 400V
@@ -15,3 +13,14 @@ Sursa|1204|Tensiune|Continuu|120|0|20|fara|fara
 CI|9900|Transformator|IN-;IN+;OUT-;OUT+|Raport IN/OUT: 1/6
 Liniar|1503|Rezistor|15|100|500|kilo|Aur
 Liniar|1922|Bobina|67.7|234|500|mili|Argint
+Liniar|1120|Rezistor|45|123|331|fara|Metal-Oxid
+Sursa|8213|Curent|Continuu|10|0|7|fara|fara
+Dioda|1932|Comutare|0.34|4|100|Siliciu
+CI|5521|Tranzistor bipolar PNP|Emitor;Colector;Baza|Tensiune baza-emitor: 0.5V;Amplificare (hfe): 1250
+Liniar|1222|Rezistor|10|10|100|mili|Argint
+Dioda|9087|TVS|1|15|1000|Ceramic
+CI|8159|Tranzistor cu priza mediana|IN-;IN+;OUT+;OUT_M;OUT-|Raport IN/OUT: 3,6;Tensiune maxima: 500V
+Sursa|9310|Putere|Continuu|1000|0|100|kilo|fara
+Dioda|4824|Zener|0.5|10|100|Metal-Oxid
+CI|8239|Comparator analog|V1;V2;OUT;GND|Tensiune maxima: 50 V;Tensiune minima: -10 V
+Liniar|1419|Rezistor|15|500|1000|kilo|Ceramic

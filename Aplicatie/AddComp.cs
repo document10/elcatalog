@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework.Forms;
+using MetroFramework.Controls;
 
 namespace Aplicatie
 {
@@ -36,11 +38,11 @@ namespace Aplicatie
             cmbTipDio.SelectedIndex = 0;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnConfirm_Click(object sender, EventArgs e)
         {
             //Iinitializari
             string tab = "";
-            
+            //verificare cod lipsa
             if (string.IsNullOrWhiteSpace(txtCod.Text))
             {
                 lblErr.Text = "Codul componentei nu este completat!";
@@ -187,16 +189,13 @@ namespace Aplicatie
 
                 case "Integrat":
                     tab = "Circuit Integrat adaugat!";
-                    List<string> porturi = rtbPorts.Text.Split('\n').ToList();
-                    List<string> specs = rtbSpecs.Text.Split('\n').ToList();
-                    CircuitIntegrat ci = new CircuitIntegrat(txtCod.Text, txtNume.Text);
                     //verificare campuri goale
                     if (string.IsNullOrWhiteSpace(txtNume.Text))
                     {
                         lblErr.Text = "Numele nu este completat!";
                         return;
                     }
-                    if (string.IsNullOrWhiteSpace(rtbPorts.Text))
+                    if (string.IsNullOrWhiteSpace(txtPorts.Text))
                     {
                         lblErr.Text = "Porturile nu sunt completate!";
                         return;
@@ -207,16 +206,11 @@ namespace Aplicatie
                         return;
                     }
                     //configurare componenta
-                    foreach (string port in porturi)
-                    {
-                        if (!string.IsNullOrWhiteSpace(port.Trim()))
-                            ci.porturi.Add(port.Trim());
-                    }
-                    foreach (string spec in specs)
-                    {
-                        if (!string.IsNullOrWhiteSpace(spec.Trim()))
-                            ci.alteSpec.Add(spec.Trim());
-                    }
+                    List<string> porturi = txtPorts.Text.Split(' ').ToList();
+                    List<string> specs = rtbSpecs.Text.Split('\n').ToList();
+                    CircuitIntegrat ci = new CircuitIntegrat(txtCod.Text, txtNume.Text);
+                    foreach (string port in porturi) if (!string.IsNullOrWhiteSpace(port.Trim())) ci.porturi.Add(port.Trim());
+                    foreach (string spec in specs) if (!string.IsNullOrWhiteSpace(spec.Trim())) ci.alteSpec.Add(spec.Trim());
                     cat.Adauga(ci);
                     break;
 
