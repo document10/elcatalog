@@ -27,25 +27,30 @@ namespace Aplicatie
         private void AddComp_Load(object sender, EventArgs e)
         {
             //initializare eroare
-            lblErr.Text = "";
+            lblErr.Visible = false;
             //valori implicite meniuri
-            cmbTipLin.SelectedIndex = 0;
             cmbUnitLin.SelectedIndex = 4;
             cmbFrec.SelectedIndex = 4;
             cmbValSrs.SelectedIndex = 4;
             cmbSemn.SelectedIndex = 0;
-            cmbTipSrs.SelectedIndex = 0;
             cmbTipDio.SelectedIndex = 0;
         }
 
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private void btnConf_Click(object sender, EventArgs e)
         {
             //Iinitializari
             string tab = "";
+            lblErr.Visible = true;
             //verificare cod lipsa
             if (string.IsNullOrWhiteSpace(txtCod.Text))
             {
                 lblErr.Text = "Codul componentei nu este completat!";
+                return;
+            }
+            //verificare cod existent
+            if (!cat.CodUnic(txtCod.Text))
+            {
+                lblErr.Text = "Codul introdus exista deja!";
                 return;
             }
             switch (clasificare.SelectedTab.Text)
@@ -75,23 +80,26 @@ namespace Aplicatie
                     }
                     //validare valori numerice
                     double valLin,pMaxLin, vMaxLin;
-                    if (!double.TryParse(txtValLin.Text.Trim(), out valLin))
+                    if (!double.TryParse(txtValLin.Text.Trim(), out valLin) || valLin < 0)
                     {
                         lblErr.Text = "Valoarea nu este valida!";
                         return;
                     }
-                    if (!double.TryParse(txtVmaxLin.Text.Trim(), out vMaxLin))
+                    if (!double.TryParse(txtVmaxLin.Text.Trim(), out vMaxLin) || vMaxLin < 0)
                     {
                         lblErr.Text = "Tensiunea maxima nu este valida!";
                         return;
                     }
-                    if (!double.TryParse(txtPmaxLin.Text.Trim(), out pMaxLin))
+                    if (!double.TryParse(txtPmaxLin.Text.Trim(), out pMaxLin) || pMaxLin < 0)
                     {
                         lblErr.Text = "Puterea nu este valida!";
                         return;
                     }
                     //configurare componenta
-                    TipLiniar tipLin = (TipLiniar)Enum.Parse(typeof(TipLiniar), cmbTipLin.Text);
+                    TipLiniar tipLin=TipLiniar.Rezistor;
+                    if(rdbRez.Checked) tipLin = TipLiniar.Rezistor;
+                    else if (rdbCap.Checked) tipLin = TipLiniar.Condensator;
+                    else if (rdbBob.Checked) tipLin = TipLiniar.Bobina;
                     Unitate unitate = (Unitate)Enum.Parse(typeof(Unitate), cmbUnitLin.Text);
                     Liniar liniar = new Liniar(txtCod.Text.Trim(),tipLin,valLin,unitate,vMaxLin,pMaxLin,txtMatLin.Text.Trim());
                     cat.Adauga(liniar);
@@ -117,23 +125,26 @@ namespace Aplicatie
                     }
                     //validare valori numerice
                     double valSrs, frecSrs, rezInt;
-                    if (!double.TryParse(txtValSrs.Text.Trim(), out valSrs))
+                    if (!double.TryParse(txtValSrs.Text.Trim(), out valSrs)||valSrs < 0)
                     {
                         lblErr.Text = "Valoarea nu este valida!";
                         return;
                     }
-                    if (!double.TryParse(txtFrec.Text.Trim(), out frecSrs))
+                    if (!double.TryParse(txtFrec.Text.Trim(), out frecSrs)||frecSrs < 0)
                     {
                         lblErr.Text = "Frecventa nu este valida!";
                         return;
                     }
-                    if (!double.TryParse(txtRez.Text.Trim(), out rezInt))
+                    if (!double.TryParse(txtRez.Text.Trim(), out rezInt) || rezInt < 0)
                     {
                         lblErr.Text = "Rezistenta interna nu este valida!";
                         return;
                     }
                     //configurare componenta
-                    TipSursa tipSrs = (TipSursa)Enum.Parse(typeof(TipSursa), cmbTipSrs.Text);
+                    TipSursa tipSrs = TipSursa.Tensiune;
+                    if (rdbTen.Checked) tipSrs = TipSursa.Tensiune;
+                    else if (rdbAmp.Checked) tipSrs = TipSursa.Curent;
+                    else if (rdbPow.Checked) tipSrs = TipSursa.Putere;
                     Semnal tipSem = (Semnal)Enum.Parse(typeof(Semnal), cmbSemn.Text);
                     Unitate uval = (Unitate)Enum.Parse(typeof(Unitate), cmbValSrs.Text);
                     Unitate ufrec = (Unitate)Enum.Parse(typeof(Unitate),cmbFrec.Text);
@@ -166,17 +177,17 @@ namespace Aplicatie
                     }
                     //validare valori numerice
                     double vPr, vStr, pMaxDio;
-                    if (!double.TryParse(txtVpr.Text.Trim(), out vPr))
+                    if (!double.TryParse(txtVpr.Text.Trim(), out vPr) || vPr < 0)
                     {
                         lblErr.Text = "Tensiunea de prag nu este valida!";
                         return;
                     }
-                    if (!double.TryParse(txtVstr.Text.Trim(), out vStr))
+                    if (!double.TryParse(txtVstr.Text.Trim(), out vStr) || vStr < 0)
                     {
                         lblErr.Text = "Tensiunea de strapungere nu este valida!";
                         return;
                     }
-                    if (!double.TryParse(txtPmaxDio.Text.Trim(), out pMaxDio))
+                    if (!double.TryParse(txtPmaxDio.Text.Trim(), out pMaxDio) || pMaxDio < 0)
                     {
                         lblErr.Text = "Puterea maxima nu este valida!";
                         return;

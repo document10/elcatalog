@@ -42,7 +42,7 @@ public class Dioda : Componenta
 
     public override string ToString()
     {
-        return $"Dioda {tip} ({cod}) din {mat}\ntensiune prag {tprag} V\ntensiune strapungere {tstr} V\nputere maxima {pmax} W";
+        return $"Dioda {tip} din {mat}\ntensiune prag {tprag} V\ntensiune strapungere {tstr} V\nputere maxima {pmax} W";
     }
 
     public override string Tip()

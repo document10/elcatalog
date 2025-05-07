@@ -6,7 +6,6 @@ Liniar|1093|Condensator|66|100|205|nano|Ceramic
 Liniar|1099|Bobina|55|1000|1902|mili|Cupru
 Liniar|1234|Condensator|10|100|400|pico|Ceramic
 Sursa|1887|Curent|Fierastrau|25|100|5|fara|kilo
-Dioda|9931|Schottky|0.9|12|300|Ceramic
 CI|2256|Tranzistor TECMOS|Drena;Sursa;Poarta|Curent maxim 10A;Rezistenta activa 10 ohmi
 Liniar|1253|Rezistor|125|199|430|fara|Cupru
 Sursa|1204|Tensiune|Continuu|120|0|20|fara|fara
@@ -24,3 +23,7 @@ Sursa|9310|Putere|Continuu|1000|0|100|kilo|fara
 Dioda|4824|Zener|0.5|10|100|Metal-Oxid
 CI|8239|Comparator analog|V1;V2;OUT;GND|Tensiune maxima: 50 V;Tensiune minima: -10 V
 Liniar|1419|Rezistor|15|500|1000|kilo|Ceramic
+Liniar|1920|Rezistor|10|1000|2500|fara|Ceramic
+Liniar|1923|Condensator|10|199|1000|micro|Electrolitic
+Sursa|1320|Putere|Continuu|100|0|12|fara|fara
+Sursa|1399|Curent|Continuu|35|0|221|fara|fara

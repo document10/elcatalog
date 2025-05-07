@@ -76,13 +76,13 @@ public class Sursa : Componenta
                 muval += "err";
                 break;
         }
-        if (semnal==Semnal.Continuu) return $"Sursa de {tip.ToString()} ({cod}) {val} {muval}\n{rezint} Ohmi rezistenta interna";
+        if (semnal==Semnal.Continuu) return $"Sursa {tip.ToString()} de {val} {muval}\n{rezint} Ohmi rezistenta interna";
         else
         {
             string mufreq = "";
             if (ufreq != Unitate.fara) mufreq = ufreq.ToString();
             mufreq += "Hertzi";
-            return $"Sursa de {tip.ToString()} ({cod}) de forma {semnal.ToString()}\n{val} {muval} la {freq} {mufreq}\n{rezint} Ohmi rezistenta interna";
+            return $"Sursa de {tip.ToString()} de forma {semnal.ToString()}\n{val} cu amplitudine de {muval} la {freq} {mufreq}\n{rezint} Ohmi rezistenta interna";
         }
     }
 

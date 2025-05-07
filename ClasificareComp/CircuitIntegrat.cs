@@ -33,7 +33,7 @@ public class CircuitIntegrat : Componenta
         else ports = string.Join(" ", porturi);
         if (alteSpec.Count == 0) specs = "NESPECIFICAT";
         else specs = string.Join("\n",alteSpec);
-        return $"{nume} ({cod})\nPorturi: {ports}\nAlte specificatii:\n{specs}";
+        return $"{nume} \nPorturi: {ports}\nAlte specificatii:\n{specs}";
     }
 
     public override string Tip()

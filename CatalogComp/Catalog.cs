@@ -65,5 +65,10 @@ public class Catalog
         return comps.FindAll(c =>c.cod.Contains(ccod));
     }
 
+    public bool CodUnic(string ccod)
+    {
+        return comps.Find(c => c.cod == ccod) == null;
+    }
+
 }
 

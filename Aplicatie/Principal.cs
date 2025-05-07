@@ -10,6 +10,7 @@ namespace Aplicatie
     public partial class Principal : MetroForm
     {
         CatalogFisier catalog;
+        Catalog memorie;
         public Principal()
         {
             InitializeComponent();
@@ -22,18 +23,21 @@ namespace Aplicatie
             //creare catalog
             string locatieFisierSolutie = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             catalog = new CatalogFisier(locatieFisierSolutie + "\\" + ConfigurationManager.AppSettings["NumeFisier"]);
+            memorie = catalog.CopieMemorie();
             //afisare in tab1
-            AfisareCatalog(catalog.CopieMemorie());
+            AfisareCatalog(memorie.comps);
             afisare.ClearSelection();
             afisare.CurrentCell = null;
+            //initializare eroare
+            lblErr.Text = "";
         }
 
-        private void AfisareCatalog(Catalog memorie)
+        private void AfisareCatalog(List<Componenta> comps)
         {
             afisare.Rows.Clear(); //curatare date vechi
-            for (int i = 0; i < memorie.Nr; i++)
+            for (int i = 0; i < comps.Count; i++)
             {
-                afisare.Rows.Add(memorie.comps[i].cod, memorie.comps[i].Tip(), memorie.comps[i].ToString());
+                afisare.Rows.Add(comps[i].cod, comps[i].Tip(), comps[i].ToString());
                 afisare.Rows[i].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             }
         }
@@ -46,36 +50,10 @@ namespace Aplicatie
             addComp.Close();
             addComp.Dispose();
             //reafisare catalog
-            AfisareCatalog(catalog.CopieMemorie());
+            memorie = catalog.CopieMemorie(); //actualizare memorie
+            AfisareCatalog(memorie.comps);
             afisare.ClearSelection();
             afisare.CurrentCell = null;
-        }
-
-        private void txtCauta_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtCauta.Text))
-            {
-                afisare.Rows.Clear();
-                AfisareCatalog(catalog.CopieMemorie());
-            }
-            else
-            {
-                List<Componenta> lista = catalog.CautaCod(txtCauta.Text);
-                if (lista.Count == 0)
-                {
-                    afisare.Rows.Clear();
-                    afisare.Rows.Add(txtCauta.Text, "Neidentificat", $"Nu am gasit componenta cu codul \"{txtCauta.Text}\"");
-                }
-                else
-                {
-                    afisare.Rows.Clear();
-                    for (int i = 0; i < lista.Count; i++)
-                    {
-                        afisare.Rows.Add(lista[i].cod, lista[i].Tip(), lista[i].ToString());
-                        afisare.Rows[i].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                    }
-                }
-            }
         }
 
         private void afisare_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -96,9 +74,97 @@ namespace Aplicatie
             catalog.Elimina(afisare.CurrentRow.Cells[0].Value.ToString());
             MessageBox.Show($"Componenta {comp.Tip()}({comp.cod}) a fost stearsa cu succes!", "Stergere componenta", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //reafisare catalog
-            AfisareCatalog(catalog.CopieMemorie());
+            memorie = catalog.CopieMemorie(); //actualizare memorie
+            AfisareCatalog(memorie.comps);
             afisare.ClearSelection();
             afisare.CurrentCell = null;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtCrit.Text = "";
+            lblErr.Text = "";
+            AfisareCatalog(memorie.comps);
+        }
+
+        private void btnLook_Click(object sender, EventArgs e)
+        {
+            List<Componenta> rez= new List<Componenta>();
+            int val;
+            if (string.IsNullOrWhiteSpace(txtCrit.Text))
+            {
+                lblErr.Text = "Introduceti un criteriu de cautare!";
+                return;
+            }
+            lblErr.Text = "";
+            if (rdbCod.Checked)
+            {
+                rez = catalog.CautaCod(txtCrit.Text);
+            }
+            else if (rdbVal.Checked)
+            {
+                if (!int.TryParse(txtCrit.Text, out val)||val<0)
+                {
+                    lblErr.Text = "Introduceti o valoare valida!";
+                    return;
+                }
+                foreach (Componenta c in memorie.comps)
+                {
+                    if (c.Tip() == "Liniar")
+                    {
+                        Liniar liniar = (Liniar)c;
+                        if (liniar.val == val)rez.Add(liniar);
+                    }
+                    if (c.Tip() == "Sursa")
+                    {
+                        Sursa sursa = (Sursa)c;
+                        if (sursa.val == val)rez.Add(sursa);
+                    }
+                }
+            }
+            else if (rdbVmax.Checked) {
+                if (!int.TryParse(txtCrit.Text, out val)||val < 0)
+                {
+                    lblErr.Text = "Introduceti o valoare valida!";
+                    return;
+                }
+                foreach (Componenta c in memorie.comps)
+                {
+                    if (c.Tip() == "Liniar")
+                    {
+                        Liniar liniar = (Liniar)c;
+                        if (liniar.vmax == val)rez.Add(liniar);
+                    }
+                }
+            }
+            else if (rdbPmax.Checked)
+            {
+                if (!int.TryParse(txtCrit.Text, out val) || val < 0)
+                {
+                    lblErr.Text = "Introduceti o valoare valida!";
+                    return;
+                }
+                foreach (Componenta c in memorie.comps)
+                {
+                    if (c.Tip() == "Liniar")
+                    {
+                        Liniar liniar = (Liniar)c;
+                        if (liniar.pmax == val) rez.Add(liniar);
+                    }
+                    if(c.Tip() == "Dioda")
+                    {
+                        Dioda dioda = (Dioda)c;
+                        if (dioda.pmax == val) rez.Add(dioda);
+                    }
+                }
+            }
+            if (rez.Count > 0) AfisareCatalog(rez);
+            else
+            {
+                lblErr.Text = "Componenta nu a fost gasita!";
+                return;
+            }
+            lblErr.Text = "";
         }
     }
 }

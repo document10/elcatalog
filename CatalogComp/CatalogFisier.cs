@@ -83,5 +83,10 @@ public class CatalogFisier
     {
         return CopieMemorie().CautaCod(ccod);
     }
+
+    public bool CodUnic(string ccod)
+    {
+        return CopieMemorie().CodUnic(ccod);
+    }
 }
 
