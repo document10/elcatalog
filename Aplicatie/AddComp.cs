@@ -17,11 +17,42 @@ namespace Aplicatie
     public partial class AddComp: Form
     {
         private CatalogFisier cat;
-        public AddComp()
+        bool editMode = false;
+        string prcod = "";
+        int typeindex = 0;
+        Componenta cedit;
+        public AddComp(bool editMode=false,string cod="")
         {
             InitializeComponent();
             string locatieFisierSolutie = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             cat = new CatalogFisier(locatieFisierSolutie + "\\" + ConfigurationManager.AppSettings["NumeFisier"]);
+            this.editMode = editMode;
+            this.prcod = cod;
+            cedit = cat.CautaCod(prcod)[0];
+            switch (cedit.Tip())
+            {
+                case "Liniar":
+                    clasificare.SelectedIndex = 0;
+                    typeindex = 0;
+                    break;
+                case "Sursa":
+                    clasificare.SelectedIndex = 1;
+                    typeindex = 1;
+                    break;
+                case "Dioda":
+                    clasificare.SelectedIndex = 2;
+                    typeindex = 2;
+                    break;
+                case "Circuit Integrat":
+                    clasificare.SelectedIndex = 3;
+                    typeindex = 3;
+                    break;
+                default:
+                    MessageBox.Show("Tip de componenta necunoscut!", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                    break;
+            }
+            this.DialogResult= DialogResult.Cancel;
         }
 
         private void AddComp_Load(object sender, EventArgs e)
@@ -29,17 +60,107 @@ namespace Aplicatie
             //initializare eroare
             lblErr.Visible = false;
             //valori implicite meniuri
-            cmbUnitLin.SelectedIndex = 4;
-            cmbFrec.SelectedIndex = 4;
-            cmbValSrs.SelectedIndex = 4;
-            cmbSemn.SelectedIndex = 0;
-            cmbTipDio.SelectedIndex = 0;
+            if (!editMode)
+            {
+                clasificare.SelectedIndex = 0;
+                cmbUnitLin.SelectedIndex = 4;
+                cmbFrec.SelectedIndex = 4;
+                cmbValSrs.SelectedIndex = 4;
+                cmbSemn.SelectedIndex = 0;
+                cmbTipDio.SelectedIndex = 0;
+                lblErr.Visible = false;
+            }
+            else { 
+                this.Text = "Editare componenta";
+                txtCod.Text = cedit.cod;
+                switch (cedit.Tip())
+                {
+                    case "Liniar":
+                        this.Text = "Editare liniar";
+                        Liniar lin = (Liniar)cedit;
+                        txtValLin.Text = $"{lin.val}";
+                        txtVmaxLin.Text = $"{lin.vmax}";
+                        txtPmaxLin.Text = $"{lin.pmax}";
+                        txtMatLin.Text = lin.mat;
+                        cmbUnitLin.Text = $"{lin.unit}";
+                        switch (lin.tip)
+                        {
+                            case TipLiniar.Rezistor:
+                                rdbRez.Checked = true;
+                                rdbCap.Checked = false;
+                                rdbBob.Checked = false;
+                                break;
+                            case TipLiniar.Bobina:
+                                rdbRez.Checked = false;
+                                rdbCap.Checked = false;
+                                rdbBob.Checked = true;
+                                break;
+                            case TipLiniar.Condensator:
+                                rdbRez.Checked = false;
+                                rdbCap.Checked = true;
+                                rdbBob.Checked = false;
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case "Sursa":
+                        this.Text = "Editare sursa";
+                        Sursa srs = (Sursa)cedit;
+                        txtValSrs.Text = $"{srs.val}";
+                        txtFrec.Text = $"{srs.freq}";
+                        txtRez.Text = $"{srs.rezint}";
+                        cmbFrec.Text = $"{srs.ufreq}";
+                        cmbValSrs.Text = $"{srs.uval}";
+                        cmbSemn.Text = $"{srs.semnal}";
+                        switch (srs.tip)
+                        {
+                            case TipSursa.Tensiune:
+                                rdbTen.Checked = true;
+                                rdbAmp.Checked = false;
+                                rdbPow.Checked = false;
+                                break;
+                            case TipSursa.Curent:
+                                rdbTen.Checked = false;
+                                rdbAmp.Checked = true;
+                                rdbPow.Checked = false;
+                                break;
+                            case TipSursa.Putere:
+                                rdbTen.Checked = false;
+                                rdbAmp.Checked = false;
+                                rdbPow.Checked = true;
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case "Dioda":
+                        this.Text = "Editare dioda";
+                        Dioda dio = (Dioda)cedit;
+                        txtMatDio.Text = dio.mat;
+                        txtPmaxDio.Text = $"{dio.pmax}";
+                        txtVpr.Text = $"{dio.tprag}";
+                        txtVstr.Text = $"{dio.tstr}";
+                        cmbTipDio.Text = $"{dio.tip}";
+                        break;
+                    case "Circuit Integrat":
+                        this.Text = "Editare circuit integrat";
+                        CircuitIntegrat cint = (CircuitIntegrat)cedit;
+                        txtNume.Text = cint.nume;
+                        txtPorts.Text = string.Join(" ",cint.porturi);
+                        rtbSpecs.Text = string.Join("\n", cint.alteSpec);
+                        break;
+                    default:
+                        MessageBox.Show("Tip de componenta necunoscut!", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Close();
+                        break;
+                }
+            }
         }
 
         private void btnConf_Click(object sender, EventArgs e)
         {
             //Iinitializari
-            string tab = "";
             lblErr.Visible = true;
             //verificare cod lipsa
             if (string.IsNullOrWhiteSpace(txtCod.Text))
@@ -48,7 +169,7 @@ namespace Aplicatie
                 return;
             }
             //verificare cod existent
-            if (!cat.CodUnic(txtCod.Text))
+            if (!cat.CodUnic(txtCod.Text)&&!editMode)
             {
                 lblErr.Text = "Codul introdus exista deja!";
                 return;
@@ -56,7 +177,6 @@ namespace Aplicatie
             switch (clasificare.SelectedTab.Text)
             {
                 case "Liniar":
-                    tab= "Liniar adaugat!";
                     //verificare campuri lipsa
                     if(string.IsNullOrWhiteSpace(txtValLin.Text))
                     {
@@ -102,11 +222,11 @@ namespace Aplicatie
                     else if (rdbBob.Checked) tipLin = TipLiniar.Bobina;
                     Unitate unitate = (Unitate)Enum.Parse(typeof(Unitate), cmbUnitLin.Text);
                     Liniar liniar = new Liniar(txtCod.Text.Trim(),tipLin,valLin,unitate,vMaxLin,pMaxLin,txtMatLin.Text.Trim());
-                    cat.Adauga(liniar);
+                    if (!editMode)cat.Adauga(liniar);
+                    else cat.Editare(prcod, liniar);
                     break;
 
                 case "Sursa":
-                    tab = "Sursa adaugata!";
                     //verificare campuri lipsa
                     if (string.IsNullOrWhiteSpace(txtValSrs.Text))
                     {
@@ -149,11 +269,11 @@ namespace Aplicatie
                     Unitate uval = (Unitate)Enum.Parse(typeof(Unitate), cmbValSrs.Text);
                     Unitate ufrec = (Unitate)Enum.Parse(typeof(Unitate),cmbFrec.Text);
                     Sursa sursa = new Sursa(txtCod.Text, tipSrs, tipSem, valSrs, frecSrs,uval,ufrec,rezInt);
-                    cat.Adauga(sursa);
+                    if(!editMode)cat.Adauga(sursa);
+                    else cat.Editare(prcod, sursa);
                     break;
 
                 case "Dioda":
-                    tab = "Dioda adaugata!";
                     //verificare campuri goale
                     if(string.IsNullOrWhiteSpace(txtVpr.Text))
                     {
@@ -195,11 +315,11 @@ namespace Aplicatie
                     //configurare componenta
                     TipDioda tipDioda = (TipDioda)Enum.Parse(typeof(TipDioda), cmbTipDio.Text);
                     Dioda dio = new Dioda(txtCod.Text, tipDioda, vPr, vStr, pMaxDio,txtMatDio.Text);
-                    cat.Adauga(dio);
+                    if(!editMode)cat.Adauga(dio);
+                    else cat.Editare(prcod, dio);
                     break;
 
                 case "Integrat":
-                    tab = "Circuit Integrat adaugat!";
                     //verificare campuri goale
                     if (string.IsNullOrWhiteSpace(txtNume.Text))
                     {
@@ -222,15 +342,25 @@ namespace Aplicatie
                     CircuitIntegrat ci = new CircuitIntegrat(txtCod.Text, txtNume.Text);
                     foreach (string port in porturi) if (!string.IsNullOrWhiteSpace(port.Trim())) ci.porturi.Add(port.Trim());
                     foreach (string spec in specs) if (!string.IsNullOrWhiteSpace(spec.Trim())) ci.alteSpec.Add(spec.Trim());
-                    cat.Adauga(ci);
+                    if (!editMode)cat.Adauga(ci);
+                    else cat.Editare(prcod, ci);
                     break;
 
                 default:
-                    tab = "Componenta adaugata!";
                     break;
             }
-            MessageBox.Show("Componenta a fost adaugata cu succes!", tab, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void clasificare_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(editMode && clasificare.SelectedIndex != typeindex) clasificare.SelectedIndex = typeindex;
+        }
+
+        private void clasificare_Enter(object sender, EventArgs e)
+        {
+            
         }
     }
 }

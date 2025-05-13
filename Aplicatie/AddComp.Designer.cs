@@ -127,6 +127,8 @@
             this.clasificare.SelectedIndex = 0;
             this.clasificare.Size = new System.Drawing.Size(358, 212);
             this.clasificare.TabIndex = 1;
+            this.clasificare.SelectedIndexChanged += new System.EventHandler(this.clasificare_SelectedIndexChanged);
+            this.clasificare.Enter += new System.EventHandler(this.clasificare_Enter);
             // 
             // tabPage2
             // 

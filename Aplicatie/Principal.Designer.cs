@@ -40,7 +40,7 @@
             this.toolAdd = new System.Windows.Forms.ToolStripButton();
             this.btnRem = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cautare = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClear = new MetroFramework.Controls.MetroButton();
             this.rdbCod = new MetroFramework.Controls.MetroRadioButton();
@@ -50,10 +50,11 @@
             this.txtCrit = new MetroFramework.Controls.MetroTextBox();
             this.btnLook = new MetroFramework.Controls.MetroButton();
             this.lblErr = new MetroFramework.Controls.MetroLabel();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.afisare)).BeginInit();
             this.unelte.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.cautare.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,7 +103,7 @@
             this.afisare.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("HoloLens MDL2 Assets", 12F);
             this.afisare.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.afisare.Size = new System.Drawing.Size(498, 450);
+            this.afisare.Size = new System.Drawing.Size(473, 489);
             this.afisare.TabIndex = 0;
             this.afisare.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.afisare_CellMouseDoubleClick);
             // 
@@ -133,11 +134,12 @@
             this.unelte.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.unelte.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolAdd,
-            this.btnRem});
+            this.btnRem,
+            this.toolStripLabel1});
             this.unelte.Location = new System.Drawing.Point(0, 0);
             this.unelte.Name = "unelte";
             this.unelte.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.unelte.Size = new System.Drawing.Size(504, 25);
+            this.unelte.Size = new System.Drawing.Size(479, 25);
             this.unelte.TabIndex = 2;
             this.unelte.Text = "unelte";
             // 
@@ -172,27 +174,27 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.unelte, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.afisare, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cautare, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 60);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(760, 370);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(760, 520);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
-            // groupBox1
+            // cautare
             // 
-            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(507, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.tableLayoutPanel1.SetRowSpan(this.groupBox1, 2);
-            this.groupBox1.Size = new System.Drawing.Size(250, 475);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Cautare";
+            this.cautare.Controls.Add(this.tableLayoutPanel2);
+            this.cautare.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cautare.Location = new System.Drawing.Point(482, 3);
+            this.cautare.Name = "cautare";
+            this.tableLayoutPanel1.SetRowSpan(this.cautare, 2);
+            this.cautare.Size = new System.Drawing.Size(275, 514);
+            this.cautare.TabIndex = 3;
+            this.cautare.TabStop = false;
+            this.cautare.Text = "Cautare";
             // 
             // tableLayoutPanel2
             // 
@@ -209,8 +211,9 @@
             this.tableLayoutPanel2.Controls.Add(this.lblErr, 0, 6);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 9;
+            this.tableLayoutPanel2.RowCount = 8;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -219,16 +222,15 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 456);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(269, 495);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // btnClear
             // 
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClear.Location = new System.Drawing.Point(125, 116);
+            this.btnClear.Location = new System.Drawing.Point(137, 116);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(116, 23);
+            this.btnClear.Size = new System.Drawing.Size(129, 23);
             this.btnClear.TabIndex = 7;
             this.btnClear.Text = "Curata";
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -241,7 +243,7 @@
             this.rdbCod.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdbCod.Location = new System.Drawing.Point(3, 3);
             this.rdbCod.Name = "rdbCod";
-            this.rdbCod.Size = new System.Drawing.Size(238, 15);
+            this.rdbCod.Size = new System.Drawing.Size(263, 15);
             this.rdbCod.TabIndex = 0;
             this.rdbCod.TabStop = true;
             this.rdbCod.Text = "Cod";
@@ -254,7 +256,7 @@
             this.rdbVal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdbVal.Location = new System.Drawing.Point(3, 24);
             this.rdbVal.Name = "rdbVal";
-            this.rdbVal.Size = new System.Drawing.Size(238, 15);
+            this.rdbVal.Size = new System.Drawing.Size(263, 15);
             this.rdbVal.TabIndex = 1;
             this.rdbVal.Text = "Valoare";
             this.rdbVal.UseVisualStyleBackColor = true;
@@ -266,7 +268,7 @@
             this.rdbVmax.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdbVmax.Location = new System.Drawing.Point(3, 45);
             this.rdbVmax.Name = "rdbVmax";
-            this.rdbVmax.Size = new System.Drawing.Size(238, 15);
+            this.rdbVmax.Size = new System.Drawing.Size(263, 15);
             this.rdbVmax.TabIndex = 2;
             this.rdbVmax.Text = "Tensiune maxima";
             this.rdbVmax.UseVisualStyleBackColor = true;
@@ -278,7 +280,7 @@
             this.rdbPmax.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdbPmax.Location = new System.Drawing.Point(3, 66);
             this.rdbPmax.Name = "rdbPmax";
-            this.rdbPmax.Size = new System.Drawing.Size(238, 15);
+            this.rdbPmax.Size = new System.Drawing.Size(263, 15);
             this.rdbPmax.TabIndex = 3;
             this.rdbPmax.Text = "Putere maxima";
             this.rdbPmax.UseVisualStyleBackColor = true;
@@ -289,7 +291,7 @@
             this.txtCrit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCrit.Location = new System.Drawing.Point(3, 87);
             this.txtCrit.Name = "txtCrit";
-            this.txtCrit.Size = new System.Drawing.Size(238, 23);
+            this.txtCrit.Size = new System.Drawing.Size(263, 23);
             this.txtCrit.TabIndex = 4;
             // 
             // btnLook
@@ -297,7 +299,7 @@
             this.btnLook.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLook.Location = new System.Drawing.Point(3, 116);
             this.btnLook.Name = "btnLook";
-            this.btnLook.Size = new System.Drawing.Size(116, 23);
+            this.btnLook.Size = new System.Drawing.Size(128, 23);
             this.btnLook.TabIndex = 5;
             this.btnLook.Text = "Cauta";
             this.btnLook.Click += new System.EventHandler(this.btnLook_Click);
@@ -312,18 +314,24 @@
             this.lblErr.ForeColor = System.Drawing.Color.Red;
             this.lblErr.Location = new System.Drawing.Point(3, 142);
             this.lblErr.Name = "lblErr";
-            this.lblErr.Size = new System.Drawing.Size(238, 15);
+            this.lblErr.Size = new System.Drawing.Size(263, 15);
             this.lblErr.Style = MetroFramework.MetroColorStyle.Red;
             this.lblErr.TabIndex = 8;
             this.lblErr.Text = "Eroare";
             this.lblErr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblErr.UseStyleColors = true;
             // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(100, 22);
+            this.toolStripLabel1.Text = "Pentru a edita o componenta, dublu-click pe ea.";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Principal";
             this.Style = MetroFramework.MetroColorStyle.Green;
@@ -334,7 +342,7 @@
             this.unelte.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.cautare.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
@@ -351,7 +359,7 @@
         private System.Windows.Forms.ToolStripButton toolAdd;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripButton btnRem;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox cautare;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private MetroFramework.Controls.MetroRadioButton rdbCod;
         private MetroFramework.Controls.MetroRadioButton rdbVal;
@@ -361,5 +369,6 @@
         private MetroFramework.Controls.MetroButton btnLook;
         private MetroFramework.Controls.MetroButton btnClear;
         private MetroFramework.Controls.MetroLabel lblErr;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
     }
 }

@@ -1,12 +1,10 @@
 Sursa|1925|Tensiune|Rectangular|400|3|0|fara|kilo
 Dioda|1943|Zener|0.7|7|100|Germaniu
 CI|1432|Punte redresoare|IN+;IN-;OUT+;OUT-|Tensiune Maxima: 400V
-CI|1454|Tranzistor Bipolar|Baza; Colector; Emitor|Vbe=0.7V;hfe=1000;putere maxima: 500W
-Liniar|1093|Condensator|66|100|205|nano|Ceramic
+CI|1454|Tranzistor Bipolar|Baza;Colector;Emitor|Vbe=0.7V;hfe=2000;putere maxima: 510W
 Liniar|1099|Bobina|55|1000|1902|mili|Cupru
 Liniar|1234|Condensator|10|100|400|pico|Ceramic
-Sursa|1887|Curent|Fierastrau|25|100|5|fara|kilo
-CI|2256|Tranzistor TECMOS|Drena;Sursa;Poarta|Curent maxim 10A;Rezistenta activa 10 ohmi
+Sursa|1887|Putere|Fierastrau|25|100|5|fara|kilo
 Liniar|1253|Rezistor|125|199|430|fara|Cupru
 Sursa|1204|Tensiune|Continuu|120|0|20|fara|fara
 CI|9900|Transformator|IN-;IN+;OUT-;OUT+|Raport IN/OUT: 1/6
@@ -20,10 +18,15 @@ Liniar|1222|Rezistor|10|10|100|mili|Argint
 Dioda|9087|TVS|1|15|1000|Ceramic
 CI|8159|Tranzistor cu priza mediana|IN-;IN+;OUT+;OUT_M;OUT-|Raport IN/OUT: 3,6;Tensiune maxima: 500V
 Sursa|9310|Putere|Continuu|1000|0|100|kilo|fara
-Dioda|4824|Zener|0.5|10|100|Metal-Oxid
 CI|8239|Comparator analog|V1;V2;OUT;GND|Tensiune maxima: 50 V;Tensiune minima: -10 V
 Liniar|1419|Rezistor|15|500|1000|kilo|Ceramic
 Liniar|1920|Rezistor|10|1000|2500|fara|Ceramic
 Liniar|1923|Condensator|10|199|1000|micro|Electrolitic
-Sursa|1320|Putere|Continuu|100|0|12|fara|fara
 Sursa|1399|Curent|Continuu|35|0|221|fara|fara
+Liniar|1093|Condensator|70|100|205|nano|Ceramic
+CI|2256|Tranzistor TECMOS|Drena;Sursa;Poarta|Curent maxim 10A;Rezistenta activa 1 ohmi
+Sursa|1320|Putere|Continuu|100|0|9|fara|fara
+Dioda|4824|Zener|0.6|8|100|Metal-Oxid
+Liniar|1000|Condensator|10|100|900|nano|Film
+Sursa|1802|Curent|Continuu|15|0|3.1|fara|fara
+Dioda|1995|Redresoare|0.7|5|100|567

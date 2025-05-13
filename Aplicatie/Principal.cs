@@ -48,19 +48,33 @@ namespace Aplicatie
             AddComp addComp = new AddComp();
             addComp.ShowDialog();
             addComp.Close();
-            addComp.Dispose();
             //reafisare catalog
-            memorie = catalog.CopieMemorie(); //actualizare memorie
-            AfisareCatalog(memorie.comps);
-            afisare.ClearSelection();
-            afisare.CurrentCell = null;
+            if (addComp.DialogResult == DialogResult.OK)
+            {
+                memorie = catalog.CopieMemorie(); //actualizare memorie
+                AfisareCatalog(memorie.comps);
+                afisare.ClearSelection();
+                afisare.CurrentCell = null;
+            }
         }
 
         private void afisare_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex < 0) return; //verificare daca s-a apasat pe header
             //va fi folosit pentru a edita componente mai incolo
-            MessageBox.Show($"Se va edita componenta {afisare.Rows[e.RowIndex].Cells[1].Value}({afisare.Rows[e.RowIndex].Cells[0].Value})","Editare componenta",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            //MessageBox.Show($"Se va edita componenta {afisare.Rows[e.RowIndex].Cells[1].Value}({afisare.Rows[e.RowIndex].Cells[0].Value})","Editare componenta",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            Componenta componenta = catalog.CautaCod(afisare.Rows[e.RowIndex].Cells[0].Value.ToString())[0];
+            AddComp addComp = new AddComp(true, afisare.Rows[e.RowIndex].Cells[0].Value.ToString());
+            addComp.ShowDialog();
+            addComp.Close();
+            //reafisare catalog
+            if (addComp.DialogResult == DialogResult.OK)
+            {
+                memorie = catalog.CopieMemorie(); //actualizare memorie
+                AfisareCatalog(memorie.comps);
+                afisare.ClearSelection();
+                afisare.CurrentCell = null;
+            }
         }
 
         private void btnRem_Click(object sender, EventArgs e)
@@ -165,6 +179,16 @@ namespace Aplicatie
                 return;
             }
             lblErr.Text = "";
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

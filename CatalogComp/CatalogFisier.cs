@@ -88,5 +88,13 @@ public class CatalogFisier
     {
         return CopieMemorie().CodUnic(ccod);
     }
+    
+    public void Editare(string ccod, Componenta comp)
+    {
+        Catalog cat = CopieMemorie();
+        int index = cat.comps.IndexOf(cat.CautaCod(ccod)[0]);
+        cat.comps[index] = comp;
+        using (StreamWriter fisier = new StreamWriter(numeFisier, false)) fisier.Write(cat.InvFis());
+    }
 }
 
